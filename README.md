@@ -28,6 +28,7 @@
 - [Overview](#overview)
 - [Project Structure](#project-structure)
 - [Quick Start](#quick-start)
+- [Data Preprocessing](#data-preprocessing)
 - [Example Workflow](#example-workflow)
 - [Metrics to Track](#metrics-to-track)
 - [Roadmap](#roadmap)
@@ -82,6 +83,29 @@ pip install -r requirements.txt
 
 ```bash
 python -m src.main
+```
+
+## Data Preprocessing
+
+Run one shared pipeline to combine both datasets and generate reusable splits for all models:
+
+```bash
+python src/data_preprocessing.py
+```
+
+This creates:
+- `data/processed/transactions_preprocessed.csv`
+- `data/processed/train.csv`
+- `data/processed/val.csv`
+- `data/processed/test.csv`
+- `data/processed/feature_columns.txt`
+
+Use the same preprocessing object across models:
+
+```python
+from src.model_data import get_data_for_model
+
+x_train, y_train, x_val, y_val, x_test, y_test, preprocessor = get_data_for_model()
 ```
 
 ## Example Workflow
